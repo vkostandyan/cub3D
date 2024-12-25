@@ -4,7 +4,8 @@ CC = cc #-fsanitize=address
 
 SRCS = main.c
 
-PARSING = parse.c
+PARSING = 	parse.c \
+			utils.c
 
 GNL = 	get_next_line.c \
 		get_next_line_utils.c
