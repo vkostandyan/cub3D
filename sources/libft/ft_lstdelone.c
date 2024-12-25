@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 21:43:38 by vkostand          #+#    #+#             */
-/*   Updated: 2024/12/25 15:23:57 by vkostand         ###   ########.fr       */
+/*   Created: 2024/02/07 17:00:32 by vkostand          #+#    #+#             */
+/*   Updated: 2024/02/07 17:00:34 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-    parse(argc, argv);
-    system("leaks cub3D");
-    return (0);
+	if (!lst || !del)
+		return ;
+	(*del)(lst->content);
+	free(lst);
 }

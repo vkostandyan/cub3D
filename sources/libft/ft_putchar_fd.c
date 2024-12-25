@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 21:43:38 by vkostand          #+#    #+#             */
-/*   Updated: 2024/12/25 15:23:57 by vkostand         ###   ########.fr       */
+/*   Created: 2024/02/02 18:34:32 by vkostand          #+#    #+#             */
+/*   Updated: 2024/02/02 18:40:46 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	ft_putchar_fd(char c, int fd)
 {
-    parse(argc, argv);
-    system("leaks cub3D");
-    return (0);
+	write (fd, &c, 1);
 }

@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 21:43:38 by vkostand          #+#    #+#             */
-/*   Updated: 2024/12/25 15:23:57 by vkostand         ###   ########.fr       */
+/*   Created: 2024/02/07 16:59:12 by vkostand          #+#    #+#             */
+/*   Updated: 2024/02/07 16:59:14 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-    parse(argc, argv);
-    system("leaks cub3D");
-    return (0);
+	if (!new)
+		return ;
+	new->next = *lst;
+	*lst = new;
 }

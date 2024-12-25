@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 21:43:38 by vkostand          #+#    #+#             */
-/*   Updated: 2024/12/25 15:23:57 by vkostand         ###   ########.fr       */
+/*   Created: 2024/01/23 15:52:38 by vkostand          #+#    #+#             */
+/*   Updated: 2024/01/24 16:23:07 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+size_t	ft_strlen(const char *s)
 {
-    parse(argc, argv);
-    system("leaks cub3D");
-    return (0);
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 21:43:38 by vkostand          #+#    #+#             */
-/*   Updated: 2024/12/25 15:23:57 by vkostand         ###   ########.fr       */
+/*   Created: 2024/01/24 13:38:06 by vkostand          #+#    #+#             */
+/*   Updated: 2024/01/24 13:42:57 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+int	ft_toupper(int i)
 {
-    parse(argc, argv);
-    system("leaks cub3D");
-    return (0);
+	if (i >= 97 && i <= 122)
+		i -= 32;
+	return (i);
 }

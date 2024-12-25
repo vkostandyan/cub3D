@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 21:43:38 by vkostand          #+#    #+#             */
-/*   Updated: 2024/12/25 15:23:57 by vkostand         ###   ########.fr       */
+/*   Created: 2024/02/01 17:45:08 by vkostand          #+#    #+#             */
+/*   Updated: 2024/02/01 18:46:52 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-    parse(argc, argv);
-    system("leaks cub3D");
-    return (0);
+	size_t	i;
+	char	*str1;
+	char	*str2;
+
+	str1 = (char *)s1;
+	str2 = (char *)s2;
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (i < n)
+	{
+		if (str1[i] != str2[i])
+			return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+		i++;
+	}
+	return (0);
 }

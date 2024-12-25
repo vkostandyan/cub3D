@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 21:43:38 by vkostand          #+#    #+#             */
-/*   Updated: 2024/12/25 15:23:57 by vkostand         ###   ########.fr       */
+/*   Created: 2024/02/02 14:47:15 by vkostand          #+#    #+#             */
+/*   Updated: 2024/02/02 14:47:17 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	*ft_calloc(size_t count, size_t size)
 {
-    parse(argc, argv);
-    system("leaks cub3D");
-    return (0);
+	void	*ptr;
+
+	ptr = (void *)malloc(count * size);
+	if (ptr == NULL)
+		return (NULL);
+	ft_bzero(ptr, count * size);
+	return (ptr);
 }

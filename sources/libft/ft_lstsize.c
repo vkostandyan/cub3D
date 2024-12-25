@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 21:43:38 by vkostand          #+#    #+#             */
-/*   Updated: 2024/12/25 15:23:57 by vkostand         ###   ########.fr       */
+/*   Created: 2024/02/07 16:59:27 by vkostand          #+#    #+#             */
+/*   Updated: 2024/02/07 16:59:29 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+int	ft_lstsize(t_list *lst)
 {
-    parse(argc, argv);
-    system("leaks cub3D");
-    return (0);
+	int	len;
+
+	len = 0;
+	if (!lst)
+		return (0);
+	while (lst)
+	{
+		lst = lst->next;
+		len++;
+	}
+	return (len);
 }

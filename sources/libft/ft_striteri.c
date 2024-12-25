@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 21:43:38 by vkostand          #+#    #+#             */
-/*   Updated: 2024/12/25 15:23:57 by vkostand         ###   ########.fr       */
+/*   Created: 2024/02/04 13:47:04 by vkostand          #+#    #+#             */
+/*   Updated: 2024/02/04 14:09:27 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-
-int main(int argc, char **argv)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-    parse(argc, argv);
-    system("leaks cub3D");
-    return (0);
+	unsigned int	i;
+
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i] != 0)
+	{
+		f(i, &s[i]);
+		i++;
+	}
 }

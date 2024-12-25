@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 21:43:38 by vkostand          #+#    #+#             */
-/*   Updated: 2024/12/25 15:23:57 by vkostand         ###   ########.fr       */
+/*   Created: 2024/12/25 15:01:20 by vkostand          #+#    #+#             */
+/*   Updated: 2024/12/25 17:07:42 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#ifndef PARSING_H
+# define PARSING_H
 
-int main(int argc, char **argv)
+#include "get_next_line.h"
+#include "libft.h"
+
+typedef struct s_parse
 {
-    parse(argc, argv);
-    system("leaks cub3D");
-    return (0);
-}
+    char		**map;
+    char		*north;
+	char		*west;
+	char		*east;
+	char		*south;
+    int			ceiling_color;
+	int			floor_color;
+}               t_parse;
+
+void parse(int argc, char **argv);
+
+#endif
