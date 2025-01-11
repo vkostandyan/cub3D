@@ -1,10 +1,12 @@
 NAME = cub3D
 CFLAGS = -Wall -Wextra -Werror
-CC = cc #-fsanitize=address
+CC = cc -fsanitize=address
 
 SRCS = main.c
 
 PARSING = parse.c
+
+RAYCASTING = game.c cast_rays.c \
 
 GNL = 	get_next_line.c \
 		get_next_line_utils.c
@@ -15,22 +17,24 @@ LIBFT = ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
 		ft_strlcpy.c ft_strlcat.c ft_calloc.c ft_strdup.c ft_putchar_fd.c \
 		ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_itoa.c ft_substr.c \
 		ft_strjoin.c ft_strtrim.c ft_striteri.c ft_strmapi.c  ft_split.c \
-		ft_atoi.c ft_memchr.c ft_memcmp.c ft_strnstr.c 
+		ft_atoi.c ft_memchr.c ft_memcmp.c ft_strnstr.c
 
 SRCS_DIR = ./sources/
 LIBFT_DIR = ./sources/libft/
 HEADER_DIR = ./headers/
 GNL_DIR = ./sources/get_next_line/
 PARSING_DIR = ./sources/parsing/
+RAYCASTING_DIR = ./sources/raycasting/
 OBJ_DIR = ./objects/
 
 MLX = -framework OpenGL -framework AppKit -lmlx
 
 SRCS := $(addprefix $(SRCS_DIR), $(SRCS))
 PARSING := $(addprefix $(PARSING_DIR), $(PARSING))
+RAYCASTING := $(addprefix $(RAYCASTING_DIR), $(RAYCASTING))
 GNL := $(addprefix $(GNL_DIR), $(GNL))
 LIBFT := $(addprefix $(LIBFT_DIR), $(LIBFT))
-SRCS := $(SRCS) $(PARSING) $(GNL) $(LIBFT)
+SRCS := $(SRCS) $(PARSING) $(RAYCASTING) $(GNL) $(LIBFT)
 
 OBJS := $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
