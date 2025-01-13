@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 13:33:36 by vkostand          #+#    #+#             */
-/*   Updated: 2024/02/03 17:55:49 by vkostand         ###   ########.fr       */
+/*   Updated: 2024/12/28 21:16:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	char_match(char c, char const *str)
+int	char_match(char c, char const *str)
 {
 	int	i;
 
