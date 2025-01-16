@@ -9,7 +9,8 @@ PARSING = 	parse.c \
 			colors.c \
 			helpers.c \
 			textures.c \
-			array_utils.c 
+			array_utils.c \
+			map_parsing.c
 
 GNL = 	get_next_line.c \
 		get_next_line_utils.c
@@ -28,6 +29,7 @@ LIBFT = ft_bzero.c \
 		ft_putstr_fd.c \
 		ft_isdigit.c \
 		ft_atoi.c \
+		ft_strjoin.c \
 #ft_isalnum.c \
 		ft_isalpha.c \
 		ft_isascii.c\
@@ -44,7 +46,6 @@ LIBFT = ft_bzero.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c \
 		ft_itoa.c \
-		ft_strjoin.c \
 		ft_striteri.c \
 		ft_strmapi.c  \
 		ft_memchr.c \

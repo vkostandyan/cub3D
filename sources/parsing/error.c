@@ -89,6 +89,7 @@ void	send_error(char *str)
 {
 	if (!str)
 		return ;
+	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(str, 2);
     system("leaks cub3D");
 	exit(1);

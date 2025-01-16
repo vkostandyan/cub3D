@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 15:01:20 by vkostand          #+#    #+#             */
-/*   Updated: 2025/01/13 15:23:48 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:53:26 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ int get_color(char *str);
 int get_color2(char **split);
 int check_digit(char **split);
 void free_and_set_null(char *str);
+char	*ft_join(char const *s1, char const *s2);
+void	check_name(int argc, char **argv);
+void check_chars(t_parse *data, char *map);
 
 // array utils
 void	*free_array(char **str);
