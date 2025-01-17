@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 14:46:33 by vkostand          #+#    #+#             */
-/*   Updated: 2025/01/16 21:06:56 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/01/17 15:55:26 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,32 @@ static void read_textures(t_parse *data, int fd)
         send_error("\033[1;31mError\033[0m\nNot enough textures\n");
 }
 
-static void parse_map(t_parse *data)
+static void check_walls(t_parse *data)
 {
+    int i;
+    int j;
+
+    i = 0;
+    while(data->map[i])
+    {
+        j = 0;
+        while(data->map[i][j])
+        {
+            if(data->map[i][j] == '0')
+            {
+                if(!data->map[i][j + 1] || !data->map[i][j - 1] 
+                    || !data->map[i - 1][j] || !data->map[i + 1][j]
+                    || data->map[i][j + 1] == ' ' || data->map[i][j - 1] == ' ' 
+                    || data->map[i - 1][j] == ' ' || data->map[i + 1][j] == ' ')
+                {
+                    clean_parsing_data(data);
+                    send_error("Map must be surrounded by walls\n");
+                }
+            }
+            j++;
+        }
+        i++;
+    }
     (void)data;
 }
 
@@ -87,6 +111,7 @@ static void read_and_parse_map(t_parse *data, int fd)
     char *temp;
 
     temp = read_map(fd);
+    close(fd);
     map = ft_strtrim(temp, " \t\v\n");
     free_and_set_null(temp);
     check_chars(data, map);
@@ -97,7 +122,7 @@ static void read_and_parse_map(t_parse *data, int fd)
         clean_parsing_data(data);
         send_error("malloc error\n");
     }
-    parse_map(data);
+    check_walls(data);
     (void)data;
     (void)fd;
 }
