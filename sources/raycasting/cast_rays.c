@@ -6,7 +6,7 @@
 /*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 22:45:45 by kgalstya          #+#    #+#             */
-/*   Updated: 2025/01/11 21:41:39 by kgalstya         ###   ########.fr       */
+/*   Updated: 2025/01/18 21:51:39 by kgalstya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,4 @@ void cast_rays(t_cub3D *data)
 		ray++;
 		data->ray.ray_angle += (data->player.fov_rd / screenWidth);
 	}
-
 }

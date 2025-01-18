@@ -13,18 +13,26 @@
 # define screenHeight 1000
 # define TILE_SIZE 30
 # define FOV 60
-// # define ROTATION_SPEED 0.045
-// # define PLAYER_SPEED 4
+# define PLAYER_SPEED 5
+# define ROTATION_SPEED 0.045
 
 
 # define OFF_ESC 53
 # define OFF_X 17
 
 # define KEY_PRESS 2
-# define KEY_PRESS_MASK 1
+# define KEY_PRESS_MASK 0
 # define KEY_PRESS_Z 6
 # define KEY_PRESS_X 7
 # define KEY_PRESS_Y 16
+
+# define LEFT_ARR	123
+# define RIGHT_ARR	124
+
+# define KEY_A		0
+# define KEY_S		1
+# define KEY_D		2
+# define KEY_W		13
 
 #define BLACK   "\033[30m"
 #define RED     "\033[31m"
@@ -67,6 +75,7 @@ typedef struct s_player
 	int ply_y;
 	float ply_angle;
 	float fov_rd; // field of view
+	int move_flag;
 }				t_player;
 
 typedef struct s_map
@@ -98,9 +107,22 @@ typedef struct s_cub3D
 	t_ray ray;
 }				t_cub3D;
 
+
+typedef struct s_move
+{
+	int mx;
+	int my;
+}				t_move;
+
 void game(char *argv);
+
+// casting rays //
 void cast_rays(t_cub3D *data);
 float check_angle(float angle);
 void instal_the_wall(t_cub3D *data, int ray);
+
+// movement //
+int mlx_for_move(int keycode, t_cub3D *data);
+void movment(t_cub3D *data);
 
 #endif

@@ -6,7 +6,7 @@ SRCS = main.c
 
 PARSING = parse.c
 
-RAYCASTING = game.c cast_rays.c \
+RAYCASTING = game.c cast_rays.c draw_wall.c movement.c\
 
 GNL = 	get_next_line.c \
 		get_next_line_utils.c
