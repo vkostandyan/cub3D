@@ -7,6 +7,7 @@ SRCS = main.c
 PARSING = 	parse.c \
 			error.c \
 			colors.c \
+			getter.c \
 			helpers.c \
 			textures.c \
 			array_utils.c \

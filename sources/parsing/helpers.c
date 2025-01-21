@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 17:29:56 by vkostand          #+#    #+#             */
-/*   Updated: 2025/01/16 22:29:24 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:31:57 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_type	check_type(char *str, t_parse *data, int fd, t_type type, int status)
 		return (FLOOR);
 	if (ft_strstr(str + i, "C"))
 		return (CEILING);
+	printf("blabla\n");
 	decide_error(str, type, status);
 	clean_parsing_data(data);
 	close(fd);
@@ -74,6 +75,10 @@ void clean_parsing_data(t_parse *data)
 		free_and_set_null(data->east);
     if(data->west)
 		free_and_set_null(data->west);
+	close(data->east_fd);
+	close(data->south_fd);
+	close(data->north_fd);
+	close(data->west_fd);
 }
 
 char	*ft_join(char const *s1, char const *s2)

@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 15:01:20 by vkostand          #+#    #+#             */
-/*   Updated: 2025/01/16 20:53:26 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:33:01 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ typedef enum s_type
 	CEILING
 }				t_type;
 
+typedef struct s_player_pos
+{
+	int x;
+	int y;
+	t_type start_direction;
+}				t_player_pos;
+
 typedef struct s_parse
 {
     char		**map;
@@ -63,6 +70,17 @@ typedef struct s_parse
 	char		*west;
 	char		*east;
 	char		*south;
+	
+	t_player_pos player;
+
+	int			south_fd;
+	int			north_fd;
+	int			east_fd;
+	int			west_fd;
+
+	int 		map_height;
+	int 		map_width;
+
     int			ceiling_color;
 	int			floor_color;
 }               t_parse;
@@ -88,6 +106,13 @@ void free_and_set_null(char *str);
 char	*ft_join(char const *s1, char const *s2);
 void	check_name(int argc, char **argv);
 void check_chars(t_parse *data, char *map);
+void check_walls(t_parse *data);
+char	*read_map(int fd);
+void read_and_parse_map(t_parse *data, int fd);
+void	get_player_position(t_parse *data);
+void get_map_height_and_width(t_parse *data);
+void send_file_open_error(char *name);
+void get_textures_fds(t_parse *data);
 
 // array utils
 void	*free_array(char **str);

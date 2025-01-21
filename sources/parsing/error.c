@@ -12,6 +12,15 @@
 
 #include "parsing.h"
 
+void send_file_open_error(char *name)
+{
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd("Cannot open file ", 2);
+	ft_putstr_fd(name, 2);
+	system("leaks cub3D");
+	exit(1);
+}
+
 static void	write_type(t_type type)
 {
 	if (type == NORTH)
@@ -59,7 +68,7 @@ void decide_error2(int status)
 
 void	decide_error(char *str, t_type type, int status)
 {
-	ft_putstr_fd("\033[1;31mError\033[0m\n", STDERR_FILENO);
+	ft_putstr_fd("Error\n", STDERR_FILENO);
 	if(status == MALLOC)
 		ft_putstr_fd("Malloc error\n", STDERR_FILENO);
 	else if (status == DOUBLICATE)

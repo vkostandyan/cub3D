@@ -6,40 +6,16 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 14:46:33 by vkostand          #+#    #+#             */
-/*   Updated: 2025/01/17 15:55:26 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:52:20 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-char	*read_map(int fd)
-{
-	char	*current_line;
-	char	*result;
-	char	*temp;
-	char	*current_temp;
-
-	result = "";
-	while (1)
-	{
-		current_line = get_next_line(fd);
-		if (!current_line)
-			break ;
-		temp = result;
-		if (!is_empty_line(current_line, " \n\t\v"))
-		{
-			current_temp = ft_strtrim(current_line, " \n\t\v");
-			result = ft_join(temp, current_temp);
-			free(current_temp);
-		}
-		else
-			result = ft_strjoin(temp, current_line);
-		if (ft_strncmp(result, current_line, ft_strlen(result)) != 0)
-			free(temp);
-		free(current_line);
-	}
-	return (result);
-}
+// static void check_douplicate_textures()
+// {
+    
+// }
 
 static void read_textures(t_parse *data, int fd)
 {
@@ -72,59 +48,14 @@ static void read_textures(t_parse *data, int fd)
         }
         not_empty_line++;
     }
-    if(not_empty_line != 6)
-        send_error("\033[1;31mError\033[0m\nNot enough textures\n");
+    // if(not_empty_line != 6)
+    //     send_error("\033[1;31mError\033[0m\nNot enough textures\n");
 }
 
-static void check_walls(t_parse *data)
+void fill_parse_data_with_null(t_parse *data)
 {
-    int i;
-    int j;
-
-    i = 0;
-    while(data->map[i])
-    {
-        j = 0;
-        while(data->map[i][j])
-        {
-            if(data->map[i][j] == '0')
-            {
-                if(!data->map[i][j + 1] || !data->map[i][j - 1] 
-                    || !data->map[i - 1][j] || !data->map[i + 1][j]
-                    || data->map[i][j + 1] == ' ' || data->map[i][j - 1] == ' ' 
-                    || data->map[i - 1][j] == ' ' || data->map[i + 1][j] == ' ')
-                {
-                    clean_parsing_data(data);
-                    send_error("Map must be surrounded by walls\n");
-                }
-            }
-            j++;
-        }
-        i++;
-    }
-    (void)data;
-}
-
-static void read_and_parse_map(t_parse *data, int fd)
-{
-    char *map;
-    char *temp;
-
-    temp = read_map(fd);
-    close(fd);
-    map = ft_strtrim(temp, " \t\v\n");
-    free_and_set_null(temp);
-    check_chars(data, map);
-    data->map = ft_split(map, '\n');
-    free_and_set_null(map);
-    if(!data->map)
-    {
-        clean_parsing_data(data);
-        send_error("malloc error\n");
-    }
-    check_walls(data);
-    (void)data;
-    (void)fd;
+    data->ceiling_color = 0;
+    data->floor_color = 0;
 }
 
 void parse(int argc, char **argv)
@@ -139,6 +70,9 @@ void parse(int argc, char **argv)
 		send_error(FILE_OPEN_ERR);
     read_textures(&data, fd);
     read_and_parse_map(&data, fd);
+    get_player_position(&data);
+    get_map_height_and_width(&data);
+    get_textures_fds(&data);
     clean_parsing_data(&data);
     (void)argc;
     (void)argv;
