@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 14:46:33 by vkostand          #+#    #+#             */
-/*   Updated: 2025/01/21 19:52:20 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:54:00 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void parse(int argc, char **argv)
     read_and_parse_map(&data, fd);
     get_player_position(&data);
     get_map_height_and_width(&data);
-    get_textures_fds(&data);
+    // get_textures_fds(&data);
     clean_parsing_data(&data);
     (void)argc;
     (void)argv;
