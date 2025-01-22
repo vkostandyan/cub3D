@@ -6,7 +6,7 @@
 /*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 22:45:45 by kgalstya          #+#    #+#             */
-/*   Updated: 2025/01/18 21:51:39 by kgalstya         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:48:49 by kgalstya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,20 @@ int inter_check(float angle, float *inter_value, float *step, int is_horiz)
 		if(angle > 0 && angle < M_PI)
 		{
 			*inter_value += TILE_SIZE;
-			return(-1);
+			return(0);
 		}
 		*step *= -1;
 	}
 	else
 	{
-		if(angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
+		if(!(angle > (M_PI / 2) && angle < (3 * M_PI) / 2))
 		{
 			*inter_value += TILE_SIZE;
-			return(-1);
+			return(0);
 		}
 		*step *= -1;
 	}
-	/// make one { *step *= -1; }
+	/// make one { *inter_value *= -1; }
 	return(1);
 }
 
@@ -112,10 +112,10 @@ float get_h_inter(t_cub3D *data, float angle)
 
 	step_y = TILE_SIZE;
 	step_x = TILE_SIZE / tan(angle);
-	h_x = floor(data->player.ply_y / TILE_SIZE) * TILE_SIZE;
+	h_y = floor(data->player.ply_y / TILE_SIZE) * TILE_SIZE;
 	pixel = inter_check(angle, &h_y, &step_y, 1);
-	h_y = data->player.ply_x + (h_x - data->player.ply_y) * tan(angle);
-	if((check_circle(angle, 0) && step_y < 0) || (!check_circle(angle, 0) && step_y > 0))
+	h_x = data->player.ply_x + (h_y - data->player.ply_y) / tan(angle);
+	if((check_circle(angle, 0) && step_x > 0) || (!check_circle(angle, 0) && step_x < 0))
 		step_x *= -1;
 	while(wall_hit(h_x, h_y - pixel, data))
 	{
@@ -124,6 +124,8 @@ float get_h_inter(t_cub3D *data, float angle)
 	}
 	return(sqrt(pow(h_x - data->player.ply_x,2) + pow(h_y - data->player.ply_y,2)));
 }
+
+// void file_to_img()
 
 void cast_rays(t_cub3D *data)
 {

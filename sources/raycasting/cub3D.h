@@ -6,26 +6,25 @@
 # include <string.h>
 # include <unistd.h>
 # include "mlx.h"
+
 #include <math.h>
 #include "libft.h"
 
 # define screenWidth 1900
 # define screenHeight 1000
-# define TILE_SIZE 30
+# define TILE_SIZE 10
 # define FOV 60
-# define PLAYER_SPEED 5
+# define SPACE
+# define PLAYER_SPEED 2
 # define ROTATION_SPEED 0.045
-
+# define MOUSE_ROT_SPEED 0.3
+# define IMG_SIZE 10
 
 # define OFF_ESC 53
 # define OFF_X 17
 
-# define KEY_PRESS 2
-# define KEY_PRESS_MASK 0
-# define KEY_PRESS_Z 6
-# define KEY_PRESS_X 7
-# define KEY_PRESS_Y 16
-
+#define UP_ARR		65362
+#define DOWN_ARR	65364
 # define LEFT_ARR	123
 # define RIGHT_ARR	124
 
@@ -33,6 +32,12 @@
 # define KEY_S		1
 # define KEY_D		2
 # define KEY_W		13
+
+# define KEY_PRESS 2
+# define KEY_PRESS_MASK 0
+# define KEY_PRESS_Z 6
+# define KEY_PRESS_X 7
+# define KEY_PRESS_Y 16
 
 #define BLACK   "\033[30m"
 #define RED     "\033[31m"
@@ -108,11 +113,18 @@ typedef struct s_cub3D
 }				t_cub3D;
 
 
+typedef struct s_texture
+{
+	int i;
+}				t_texture;
+
 typedef struct s_move
 {
 	int mx;
 	int my;
 }				t_move;
+
+// typedef struct
 
 void game(char *argv);
 
@@ -124,5 +136,6 @@ void instal_the_wall(t_cub3D *data, int ray);
 // movement //
 int mlx_for_move(int keycode, t_cub3D *data);
 void movment(t_cub3D *data);
-
+// void	rotate_player(t_cub3D *data, int flag);
+void	rotate_player(t_cub3D *data, int flag, float speed);
 #endif

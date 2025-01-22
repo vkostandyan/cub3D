@@ -6,7 +6,7 @@
 /*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 18:53:36 by kgalstya          #+#    #+#             */
-/*   Updated: 2025/01/18 22:56:39 by kgalstya         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:06:11 by kgalstya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void move_player(t_cub3D *data, t_move *move_cords)
 	printf(BLUE"new_x ->> %d \n", new_x);
 	printf(BLUE"new_y ->> %d \n", new_y);
 	printf(RED"x_map_cords ->> %d \n", x_map_cords);
-	printf(RED"y_map_cords ->> %d \n", y_map_cords);
+	printf(RED"y_map_cords ->> %d \n"RESET, y_map_cords);
 	if(y_map_cords < data->map.width_map_x && y_map_cords >= 0 && x_map_cords >= 0 && x_map_cords < data->map.height_map_y)
 	{
 		if(data->map.map2d[y_map_cords][x_map_cords] != '1' && data->map.map2d[y_map_cords][data->player.ply_x / TILE_SIZE] != '1'
@@ -48,8 +48,8 @@ void movment(t_cub3D *data)
 
 	if(data->player.move_flag == 1) // KEY_W
 	{
-		move_cords.mx = -cos(data->player.ply_angle) * PLAYER_SPEED;
-		move_cords.my = -sin(data->player.ply_angle) * PLAYER_SPEED;
+		move_cords.mx = cos(data->player.ply_angle) * PLAYER_SPEED;
+		move_cords.my = sin(data->player.ply_angle) * PLAYER_SPEED;
 		data->player.move_flag = 0;
 		move_player(data, &move_cords);
 	}
@@ -62,8 +62,8 @@ void movment(t_cub3D *data)
 	}
 	else if(data->player.move_flag == 3) // KEY_S
 	{
-		move_cords.mx = cos(data->player.ply_angle) * PLAYER_SPEED;
-		move_cords.my = sin(data->player.ply_angle) * PLAYER_SPEED;
+		move_cords.mx = -cos(data->player.ply_angle) * PLAYER_SPEED;
+		move_cords.my = -sin(data->player.ply_angle) * PLAYER_SPEED;
 		data->player.move_flag = 0;
 		move_player(data, &move_cords);
 	}
@@ -77,21 +77,26 @@ void movment(t_cub3D *data)
 	// move_player(data, &move_cords);
 }
 
-void	rotate_player(t_cub3D *data, int flag)
+void	rotate_player(t_cub3D *data, int flag, float speed)
 {
 	if (flag == 1)
 	{
-		data->player.ply_angle += ROTATION_SPEED; // rotate right
+		data->player.ply_angle += speed;
 		if (data->player.ply_angle > 2 * M_PI)
 			data->player.ply_angle -= 2 * M_PI;
 	}
 	else
 	{
-		data->player.ply_angle -= ROTATION_SPEED; // rotate left
+		data->player.ply_angle -= speed;
 		if (data->player.ply_angle < 0)
 			data->player.ply_angle += 2 * M_PI;
 	}
 }
+
+// void see_up_and_down()
+// {
+
+// }
 
 int mlx_for_move(int keycode, t_cub3D *data)
 {
@@ -104,14 +109,20 @@ int mlx_for_move(int keycode, t_cub3D *data)
 	}
 	if(keycode == LEFT_ARR)
 	{
-		rotate_player(data, 0);
+		rotate_player(data, 0, ROTATION_SPEED);
 		movment(data);
+		return(0);
 	}
 	else if(keycode == RIGHT_ARR)
 	{
-		rotate_player(data, 1);
+		rotate_player(data, 1, ROTATION_SPEED);
 		movment(data);
+		return(0);
 	}
+	// if(keycode == UP_ARR)
+	// {
+
+	// }
 	if(keycode == KEY_W)
 	{
 		data->player.move_flag = 1;
