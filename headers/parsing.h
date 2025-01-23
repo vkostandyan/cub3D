@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 15:01:20 by vkostand          #+#    #+#             */
-/*   Updated: 2025/01/21 19:33:01 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/01/23 19:00:05 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ typedef struct s_parse
 	int			floor_color;
 }               t_parse;
 
-void parse(int argc, char **argv);
+// void parse(int argc, char **argv);
+t_parse parse(int argc, char **argv);
 
 //helpers
 void	send_error(char *str);

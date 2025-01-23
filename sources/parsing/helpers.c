@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 17:29:56 by vkostand          #+#    #+#             */
-/*   Updated: 2025/01/21 19:31:57 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:56:48 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_type	check_type(char *str, t_parse *data, int fd, t_type type, int status)
 	clean_parsing_data(data);
 	close(fd);
 	free_and_set_null(str);
-    system("leaks cub3D");
+    // system("leaks cub3D");
 	exit(1);
 	return (NOT_VALID);
 }

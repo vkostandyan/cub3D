@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 17:29:56 by vkostand          #+#    #+#             */
-/*   Updated: 2025/01/16 22:29:20 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:56:53 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void	send_error(char *str)
 	if (!str)
 		return ;
 	ft_putstr_fd(str, 2);
-	system("leaks cub3D");
+	// system("leaks cub3D");
 	exit(1);
 }

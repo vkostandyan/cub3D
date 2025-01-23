@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 14:46:33 by vkostand          #+#    #+#             */
-/*   Updated: 2025/01/21 19:54:00 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/01/23 19:00:12 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,16 @@ static void read_textures(t_parse *data, int fd)
         }
         type = check_type(str, data, fd, type, status);
         status = save_textures(data, str, type);
-        free_and_set_null(str);
         if(status != SUCCESS)
         {
             decide_error(str, type, status);
+            free_and_set_null(str);
             close(fd);
             clean_parsing_data(data);
-            system("leaks cub3D");
+            // system("leaks cub3D");
             exit(1);
         }
+        free_and_set_null(str);
         not_empty_line++;
     }
     // if(not_empty_line != 6)
@@ -58,7 +59,7 @@ void fill_parse_data_with_null(t_parse *data)
     data->floor_color = 0;
 }
 
-void parse(int argc, char **argv)
+t_parse parse(int argc, char **argv)
 {
     t_parse data;
     int fd;
@@ -73,6 +74,7 @@ void parse(int argc, char **argv)
     get_player_position(&data);
     get_map_height_and_width(&data);
     // get_textures_fds(&data);
+    return (data);
     clean_parsing_data(&data);
     (void)argc;
     (void)argv;
