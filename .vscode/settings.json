@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"cub3d.h": "c",
+		"mlx.h": "c",
+		"libft.h": "c",
+		"array": "c",
+		"iterator": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c"
+	},
+	"C_Cpp.errorSquiggles": "disabled"
+}
