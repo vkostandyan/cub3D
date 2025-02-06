@@ -6,19 +6,21 @@
 # include <string.h>
 # include <unistd.h>
 # include "mlx.h"
+#include "parsing.h"
 
 #include <math.h>
 #include "libft.h"
 
 # define screenWidth 1900
 # define screenHeight 1000
-# define TILE_SIZE 10
+# define TILE_SIZE 64
+# define STEP_SIZE 4
 # define FOV 60
 # define SPACE
-# define PLAYER_SPEED 2
+# define PLAYER_SPEED 3
 # define ROTATION_SPEED 0.045
-# define MOUSE_ROT_SPEED 0.3
-# define IMG_SIZE 10
+# define MOUSE_ROT_SPEED 0.2
+# define IMG_SIZE 64
 
 # define OFF_ESC 53
 # define OFF_X 17
@@ -72,6 +74,8 @@ typedef struct s_img
 	int			line_length;
 	int			endian;
 	int			color;
+	int			w;
+	int			h;
 }				t_img;
 
 typedef struct s_player
@@ -98,25 +102,34 @@ typedef struct s_ray
 	float ray_angle;
 	float distance;
 	int flag;
+	float horiz_x;
+	float horiz_y;
+	float vert_x;
+	float vert_y;
 }				t_ray;
 
+typedef struct s_texture
+{
+	t_img no;
+	t_img so;
+	t_img we;
+	t_img ea;
+}			t_texture;
 
 typedef struct s_cub3D
 {
 	void *mlx;
 	void *mlx_win;
+	int wall_h;
 
+	t_texture *tex;
+	t_parse *parse_data;
 	t_map map;
 	t_player player;
 	t_img img_stract;
 	t_ray ray;
 }				t_cub3D;
 
-
-typedef struct s_texture
-{
-	int i;
-}				t_texture;
 
 typedef struct s_move
 {
@@ -126,7 +139,7 @@ typedef struct s_move
 
 // typedef struct
 
-void game(char *argv);
+void game(char *argv, t_parse *pars_data);
 
 // casting rays //
 void cast_rays(t_cub3D *data);

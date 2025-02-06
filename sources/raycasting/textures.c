@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/02 17:29:41 by vkostand          #+#    #+#             */
-/*   Updated: 2025/01/24 16:45:18 by kgalstya         ###   ########.fr       */
+/*   Created: 2025/01/24 14:26:45 by kgalstya          #+#    #+#             */
+/*   Updated: 2025/02/06 19:53:54 by kgalstya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3D.h"
 
-char	*ft_strdup(const char *s1)
+int	get_rgba(int r, int g, int b, int a)
 {
-	char	*str;
-	int		i;
-
-	str = (char *)malloc((ft_strlen(s1) + 1) * sizeof(char));
-	if (str == NULL)
-		return (0);
-	i = 0;
-	while (s1[i] != '\0' && s1[i] != '\n')
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	return (r << 24 | g << 16 | b << 8 | a << 0);
 }

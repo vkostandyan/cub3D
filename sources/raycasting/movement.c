@@ -6,7 +6,7 @@
 /*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 18:53:36 by kgalstya          #+#    #+#             */
-/*   Updated: 2025/01/22 16:06:11 by kgalstya         ###   ########.fr       */
+/*   Updated: 2025/01/24 12:50:00 by kgalstya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,23 @@ void move_player(t_cub3D *data, t_move *move_cords)
 
 	printf(BLUE"MX new_x ->> %d \n", move_cords->mx);
 	printf(BLUE"MY new_y ->> %d \n", move_cords->my);
-	new_x = roundf(move_cords->mx * TILE_SIZE + data->player.ply_x);
-	new_y = roundf(move_cords->my * TILE_SIZE + data->player.ply_y);
+	new_x = roundf(move_cords->mx * STEP_SIZE + data->player.ply_x);
+	new_y = roundf(move_cords->my * STEP_SIZE + data->player.ply_y);
 	x_map_cords = new_x / TILE_SIZE;
 	y_map_cords = new_y / TILE_SIZE;
 	printf(BLUE"new_x ->> %d \n", new_x);
 	printf(BLUE"new_y ->> %d \n", new_y);
 	printf(RED"x_map_cords ->> %d \n", x_map_cords);
 	printf(RED"y_map_cords ->> %d \n"RESET, y_map_cords);
-	if(y_map_cords < data->map.width_map_x && y_map_cords >= 0 && x_map_cords >= 0 && x_map_cords < data->map.height_map_y)
-	{
+	// if(y_map_cords < data->map.width_map_x && y_map_cords >= 0 && x_map_cords >= 0 && x_map_cords < data->map.height_map_y)
+	// {
 		if(data->map.map2d[y_map_cords][x_map_cords] != '1' && data->map.map2d[y_map_cords][data->player.ply_x / TILE_SIZE] != '1'
 				&& data->map.map2d[data->player.ply_y / TILE_SIZE][x_map_cords] != '1')
 		{
 			data->player.ply_x = new_x;
 			data->player.ply_y = new_y;
 		}
-	}
+	// }
 }
 
 void movment(t_cub3D *data)

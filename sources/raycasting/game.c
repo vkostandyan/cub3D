@@ -6,11 +6,12 @@
 /*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:11:57 by kgalstya          #+#    #+#             */
-/*   Updated: 2025/01/23 19:18:00 by kgalstya         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:47:55 by kgalstya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include "parsing.h"
 
 	// printf(RED "🌎ERROR MESSEGE\n" RESET),exit(1);
 void	my_mlx_image_clear(t_img *img)
@@ -57,7 +58,7 @@ int	close_window(t_cub3D *data)
 	return (0);
 }
 
-void	print_array(char **str)
+void	print_array_a(char **str)
 {
 	int	i;
 
@@ -69,34 +70,31 @@ void	print_array(char **str)
 	}
 }
 
-void init_map(t_map *map)
+void init_parse_data(t_cub3D *data)
 {
-	map->ply_y_start = 5;
-	map->ply_x_start = 6;
-	map->height_map_y = 10;
-	map->map2d = (char **)malloc(sizeof(char *) * (map->height_map_y + 1));
-	map->map2d[0] = ft_strdup("11111111111");
-	map->map2d[1] = ft_strdup("10000000001");
-	map->map2d[2] = ft_strdup("10000000001");
-	map->map2d[3] = ft_strdup("10100000001");
-	map->map2d[4] = ft_strdup("10100P00001");
-	map->map2d[5] = ft_strdup("10000000001");
-	map->map2d[6] = ft_strdup("10000000001");
-	map->map2d[7] = ft_strdup("10000000001");
-	map->map2d[8] = ft_strdup("10000000001");
-	map->map2d[9] = ft_strdup("11111111111");
-	map->map2d[10] = NULL;
-
-	map->width_map_x = ft_strlen(map->map2d[map->ply_y_start]);
-	print_array(map->map2d);
-	printf(YELLOW "ply_x_start -> " MAGENTA "%d\n" RESET, map->ply_x_start);
-	printf(YELLOW "ply_y_start -> " MAGENTA "%d\n" RESET, map->ply_y_start);
+	data->map.ply_y_start = data->parse_data->player.y - 1;
+	data->map.ply_x_start = data->parse_data->player.x - 1;
+	data->map.height_map_y = data->parse_data->map_height;
+	data->map.width_map_x = data->parse_data->map_width;
+	data->map.map2d = data->parse_data->map;
+	print_array_a(data->map.map2d);
+	printf(YELLOW "data->map.width_map_x -> " MAGENTA "%d\n" RESET, data->map.width_map_x);
+	printf(YELLOW "data->map.height_map_y -> " MAGENTA "%d\n" RESET, data->map.height_map_y);
+	printf(YELLOW "ply_x_start -> " MAGENTA "%d\n" RESET, data->map.ply_x_start);
+	printf(YELLOW "ply_y_start -> " MAGENTA "%d\n" RESET, data->map.ply_y_start);
 }
 void init_player_data(t_cub3D *data)
 {
 	data->player.ply_x = data->map.ply_x_start * TILE_SIZE + TILE_SIZE / 2;
 	data->player.ply_y = data->map.ply_y_start * TILE_SIZE + TILE_SIZE / 2;
-	data->player.ply_angle = M_PI;
+	if(data->parse_data->player.start_direction == NORTH)
+		data->player.ply_angle =  3 * M_PI / 2;
+	else if(data->parse_data->player.start_direction == SOUTH)
+		data->player.ply_angle = M_PI / 2;
+	else if(data->parse_data->player.start_direction == EAST)
+		data->player.ply_angle = 0;
+	else if(data->parse_data->player.start_direction == WEST)
+		data->player.ply_angle = M_PI;
 	data->player.move_flag = 0;
 	data->player.fov_rd = (FOV * M_PI) / 180;
 }
@@ -114,30 +112,57 @@ int mouse_move(int x, int y, t_cub3D *data)
 	return(0);
 }
 
-void game(char *argv)
+// void init_texture_data(t_cub3D *data)
+// {
+// 	data->tex.ea.img =
+// }
+
+int get_textures_adrr(t_cub3D *data)
+{
+	data->tex->ea.addr = mlx_get_data_addr(data->tex->ea.img, &data->tex->ea.bits_per_pixel, &data->tex->ea.line_length, &data->tex->ea.endian);
+	// printf(GREEN"%s\n"RESET, mlx_get_data_addr(data->tex.ea.img, &data->tex.ea.bits_per_pixel, &data->tex.ea.line_length, &data->tex.ea.endian));
+	data->tex->we.addr = mlx_get_data_addr(data->tex->we.img, &data->tex->we.bits_per_pixel, &data->tex->we.line_length, &data->tex->we.endian);
+	data->tex->no.addr = mlx_get_data_addr(data->tex->no.img, &data->tex->no.bits_per_pixel, &data->tex->no.line_length, &data->tex->no.endian);
+	data->tex->so.addr = mlx_get_data_addr(data->tex->so.img, &data->tex->so.bits_per_pixel, &data->tex->so.line_length, &data->tex->so.endian);
+	return(0);
+}
+
+void set_textures(t_cub3D *data)
+{
+	data->tex = malloc(sizeof(t_texture));
+	if(!data->tex)
+		printf(RED"MALLLLLOOOC\n"RESET), exit(1);
+	data->tex->ea.img = mlx_xpm_file_to_image(data->mlx, data->parse_data->east, &data->tex->ea.w, &data->tex->ea.h);
+	data->tex->we.img = mlx_xpm_file_to_image(data->mlx, data->parse_data->west, &data->tex->we.w, &data->tex->we.h);
+	data->tex->no.img = mlx_xpm_file_to_image(data->mlx, data->parse_data->north, &data->tex->no.w, &data->tex->no.h);
+	data->tex->so.img = mlx_xpm_file_to_image(data->mlx, data->parse_data->south, &data->tex->so.w, &data->tex->so.h);
+	// if(data->tex->ea.w != 64 || data->tex->no.w != 64 || data->tex->so.w != 64 || data->tex->we.w != 64 )
+	// // 	printf(YELLOW"AAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n"RESET), exit(1);
+	// if(data->tex->ea.h != 64 || data->tex->no.h != 64 || data->tex->so.h != 64 || data->tex->we.h != 64 )
+	// 	printf(YELLOW"AAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n"RESET), exit(1);
+	if(!data->tex->ea.img || !data->tex->we.img || !data->tex->no.img || !data->tex->so.img)
+		printf(YELLOW"AAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n"RESET), exit(1);
+	get_textures_adrr(data);
+}
+
+void game(char *argv, t_parse *parse_inp)
 {
 	t_cub3D data;
 	(void)argv;
 
+	data.parse_data = parse_inp;
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, screenWidth, screenHeight, "cub3D");
-	init_map(&data.map);
+	init_parse_data(&data);
 	init_player_data(&data);
+	set_textures(&data);
+	// init_texture_data(&data);
 	mlx_loop_hook(data.mlx, game_loop, &data);
 	mlx_hook(data.mlx_win, KEY_PRESS, KEY_PRESS_MASK, mlx_for_move,
 		&data);
 	mlx_hook(data.mlx_win, 6, 0, mouse_move, &data);
-	// mlx_hook(data.mlx_win, KEY_W, KEY_PRESS_MASK, mlx_for_move,
-	// 	&data);
-	// mlx_hook(data.mlx_win, KEY_S, KEY_PRESS_MASK, mlx_for_move,
-	// 	&data);
-	// mlx_hook(data.mlx_win, KEY_A, KEY_PRESS_MASK, mlx_for_move,
-	// 	&data);
-	// mlx_hook(data.mlx_win, KEY_D, KEY_PRESS_MASK, mlx_for_move,
-	// &data);
 	mlx_hook(data.mlx_win, OFF_X, KEY_PRESS_MASK, close_window,
 		&data);
-	// mlx_key_hook(data.mlx, &mlx_for_move, &data);
 	mlx_loop(data.mlx);
 
 }

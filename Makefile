@@ -13,6 +13,8 @@ PARSING = 	parse.c \
 			array_utils.c \
 			map_parsing.c
 
+RAYCASTING = game.c draw_wall.c cast_rays.c movement.c textures.c\
+
 GNL = 	get_next_line.c \
 		get_next_line_utils.c
 
@@ -59,21 +61,22 @@ HEADER_DIR = ./headers/
 GNL_DIR = ./sources/get_next_line/
 PARSING_DIR = ./sources/parsing/
 OBJ_DIR = ./objects/
+RAY_DIR = ./sources/raycasting/
 
 MLX = -framework OpenGL -framework AppKit -lmlx
 
 SRCS := $(addprefix $(SRCS_DIR), $(SRCS))
 PARSING := $(addprefix $(PARSING_DIR), $(PARSING))
+RAYCASTING := $(addprefix $(RAY_DIR), $(RAYCASTING))
 GNL := $(addprefix $(GNL_DIR), $(GNL))
 LIBFT := $(addprefix $(LIBFT_DIR), $(LIBFT))
-SRCS := $(SRCS) $(PARSING) $(GNL) $(LIBFT)
-
+SRCS := $(SRCS) $(PARSING) $(RAYCASTING) $(GNL) $(LIBFT)
 OBJS := $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -I$(HEADER_DIR) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(MLX) -I$(HEADER_DIR) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)%.o: %.c
 	@mkdir -p $(dir $@)

@@ -6,7 +6,7 @@
 /*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 22:45:45 by kgalstya          #+#    #+#             */
-/*   Updated: 2025/01/22 15:48:49 by kgalstya         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:34:40 by kgalstya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int wall_hit(float x, float y, t_cub3D *data)
 		return(0);
 	x_map = floor(x / TILE_SIZE);
 	y_map = floor(y / TILE_SIZE);
-	if(x_map >= data->map.width_map_x || y_map >= data->map.height_map_y)
+	if(x_map > data->map.width_map_x || y_map > data->map.height_map_y)
 		return(0);
 	if(data->map.map2d[y_map] && x_map <= (int)ft_strlen(data->map.map2d[y_map]))
 	{
@@ -99,6 +99,8 @@ float get_v_inter(t_cub3D *data, float angle)
 		v_x += step_x;
 		v_y += step_y;
 	}
+	data->ray.vert_x = v_x;
+	data->ray.vert_y = v_y;
 	return(sqrt(pow(v_x - data->player.ply_x,2) + pow(v_y - data->player.ply_y,2)));
 }
 
@@ -122,10 +124,10 @@ float get_h_inter(t_cub3D *data, float angle)
 		h_x += step_x;
 		h_y += step_y;
 	}
+	data->ray.horiz_x = h_x;
+	data->ray.horiz_y = h_y;
 	return(sqrt(pow(h_x - data->player.ply_x,2) + pow(h_y - data->player.ply_y,2)));
 }
-
-// void file_to_img()
 
 void cast_rays(t_cub3D *data)
 {
