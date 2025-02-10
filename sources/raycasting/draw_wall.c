@@ -6,7 +6,7 @@
 /*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 21:04:30 by kgalstya          #+#    #+#             */
-/*   Updated: 2025/02/06 19:59:58 by kgalstya         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:34:00 by kgalstya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void mlx_pixel_put_with_checking(t_cub3D *data, int x, int y, int color)
 		return ;
 	if(y >= screenHeight)
 		return ;
-	mlx_pixel_put_img(data, x, y, color); // put the pixel
+	mlx_pixel_put_img(data, x, y, color);
 }
 
 t_img *get_texture(t_cub3D *data)
@@ -41,31 +41,25 @@ t_img *get_texture(t_cub3D *data)
 	if(data->ray.flag == 0)
 	{
 		if(data->ray.ray_angle >= M_PI / 2 && data->ray.ray_angle <= 3 * (M_PI / 2))
-			return(&data->tex->we); // W gray
+			return(&data->tex->we);
 		else
-			return(&data->tex->ea); // E yelow
+			return(&data->tex->ea);
 	}
 	else
 	{
 		if(data->ray.ray_angle >= 0 && data->ray.ray_angle <= M_PI)
-			return(&data->tex->so); // S green
+			return(&data->tex->so);
 		else
-			return(&data->tex->no); // N  red
+			return(&data->tex->no);
 	}
 	return(&data->tex->no);
 }
 
-unsigned int get_color_for_draw(t_cub3D *data, int x, int y)
+unsigned int get_color_for_draw(int x, int y, t_img *text_img)
 {
 	unsigned int color;
 	char *dst;
-	t_img *text_img;
-	
-	text_img = get_texture(data);
-	while(x >= text_img->w)
-		x -= text_img->w;
-	while(y >= text_img->h)
-		y -= text_img->h;
+
 	if(x >= 0 && x < text_img->w && y >= 0 && y < text_img->h)
 	{
 		dst = text_img->addr + (y * text_img->line_length + x * (text_img->bits_per_pixel / 8));
@@ -75,19 +69,35 @@ unsigned int get_color_for_draw(t_cub3D *data, int x, int y)
 	return(0);
 }
 
+double get_dx(t_cub3D *data, t_img *text_img)
+{
+	double dx;
+	if(data->ray.flag == 1)
+		dx = (int)fmodf((data->ray.horiz_x * (text_img->w / TILE_SIZE)), text_img->w);
+	else
+		dx = (int)fmodf((data->ray.vert_y * (text_img->w / TILE_SIZE)), text_img->w);
+	return(dx);
+}
+
 void draw_wall(t_cub3D *data, int ray, double tieri_pix, double tveri_pix)
 {
 	unsigned int color;
-	// t_img *text_img;
+	double		dx;
+	double		dy;
+	double		factor;
+	t_img		*text_img;
 
-	// text_img = get_texture(data);
-	// double step = (tveri_pix - tieri_pix) / text_img->h;
+	text_img = get_texture(data);
+	factor = (double)text_img->h / data->wall_h;
+	dx = get_dx(data, text_img);
+	dy = (tieri_pix - (screenHeight / 2) + (data->wall_h / 2)) * factor;
+	if(dy < 0)
+		dy = 0;
 	while(tieri_pix < tveri_pix)
 	{
-		// if()
-		color = get_color_for_draw(data, ray, tieri_pix);
+		color = get_color_for_draw(dx , dy , text_img);
+		dy += factor;
 		mlx_pixel_put_with_checking(data, ray, tieri_pix++, color);
-		// tieri_pix++;
 	}
 }
 
