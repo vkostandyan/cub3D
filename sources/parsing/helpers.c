@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 17:29:56 by vkostand          #+#    #+#             */
-/*   Updated: 2025/01/23 18:56:48 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:56:10 by kgalstya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_type	check_type(char *str, t_parse *data, int fd, t_type type, int status)
 	while (str[i] && str[i] == ' ')
 		i++;
 	if (str[i] == '\0')
-		return (EMPTY); 
+		return (EMPTY);
 	if (ft_strstr(str + i, "NO"))
 		return (NORTH);
 	if (ft_strstr(str + i, "SO"))
@@ -59,8 +59,11 @@ t_type	check_type(char *str, t_parse *data, int fd, t_type type, int status)
 
 void free_and_set_null(char *str)
 {
-	free(str);
-	str = NULL;
+	if(str)
+	{
+		free(str);
+		str = NULL;
+	}
 }
 
 void clean_parsing_data(t_parse *data)

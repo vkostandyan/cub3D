@@ -6,7 +6,7 @@
 /*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 22:45:45 by kgalstya          #+#    #+#             */
-/*   Updated: 2025/01/24 15:34:40 by kgalstya         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:46:47 by kgalstya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int inter_check(float angle, float *inter_value, float *step, int is_horiz)
 		}
 		*step *= -1;
 	}
-	/// make one { *inter_value *= -1; }
 	return(1);
 }
 

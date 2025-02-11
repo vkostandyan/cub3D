@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   movement2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 21:43:38 by vkostand          #+#    #+#             */
-/*   Updated: 2025/02/10 16:55:32 by kgalstya         ###   ########.fr       */
+/*   Created: 2025/02/11 13:35:47 by kgalstya          #+#    #+#             */
+/*   Updated: 2025/02/11 13:38:20 by kgalstya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "cub3D.h"
-int main(int argc, char **argv)
+
+int mouse_move(int x, int y, t_cub3D *data)
 {
-	t_parse pars_data;
-    pars_data = parse(argc, argv);
-	game(*argv, &pars_data);
-    // system("leaks cub3D");
-    (void)argc;
-    (void)argv;
-    return (0);
+	static int prev_x;
+	(void)y;
+	(void)data;
+	if(prev_x > x)
+		rotate_player(data, 0, MOUSE_ROT_SPEED);
+	else if(prev_x < x)
+		rotate_player(data, 1, MOUSE_ROT_SPEED);
+	prev_x = x;
+	return(0);
+}
+
+int	close_window(t_cub3D *data)
+{
+	free_and_exit(data);
+	return(0);
 }

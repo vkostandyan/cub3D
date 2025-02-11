@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 14:46:33 by vkostand          #+#    #+#             */
-/*   Updated: 2025/01/23 19:00:12 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/02/10 19:35:06 by kgalstya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // static void check_douplicate_textures()
 // {
-    
+
 // }
 
 static void read_textures(t_parse *data, int fd)

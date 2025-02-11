@@ -16,7 +16,6 @@
 # define TILE_SIZE 64
 # define STEP_SIZE 4
 # define FOV 60
-# define SPACE
 # define PLAYER_SPEED 3
 # define ROTATION_SPEED 0.045
 # define MOUSE_ROT_SPEED 0.2
@@ -137,18 +136,31 @@ typedef struct s_move
 	int my;
 }				t_move;
 
-// typedef struct
-
+//  game  //
 void game(char *argv, t_parse *pars_data);
+void free_and_exit(t_cub3D *data);
+void destroy_img_tex(t_cub3D *data);
+int	close_window(t_cub3D *data);
 
-// casting rays //
+//  casting rays  //
 void cast_rays(t_cub3D *data);
 float check_angle(float angle);
 void instal_the_wall(t_cub3D *data, int ray);
 
-// movement //
+//  movement  //
 int mlx_for_move(int keycode, t_cub3D *data);
 void movment(t_cub3D *data);
-// void	rotate_player(t_cub3D *data, int flag);
 void	rotate_player(t_cub3D *data, int flag, float speed);
+int mouse_move(int x, int y, t_cub3D *data);
+
+//  for drawing  //
+void mlx_pixel_put_with_checking(t_cub3D *data, int x, int y, int color);
+void	mlx_pixel_put_img(t_cub3D *data, int x, int y, int color);
+t_img *get_texture(t_cub3D *data);
+unsigned int get_color_for_draw(int x, int y, t_img *text_img);
+
+//  textures  //
+void set_textures(t_cub3D *data);
+
+
 #endif
