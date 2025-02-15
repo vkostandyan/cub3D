@@ -22,7 +22,7 @@ int	ft_strstr(char *str, char *to_find)
 	i = 0;
 	if (*to_find == '\0')
 		return (1);
-	if(ft_strlen(str) < ft_strlen(to_find))
+	if (ft_strlen(str) < ft_strlen(to_find))
 		return (0);
 	while (str[i] != '\0')
 	{
