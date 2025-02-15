@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 20:47:55 by vkostand          #+#    #+#             */
-/*   Updated: 2025/02/10 19:34:52 by kgalstya         ###   ########.fr       */
+/*   Updated: 2025/02/15 16:10:30 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,9 @@ void	check_chars(t_parse *data, char *map)
 			free_and_set_null(map);
 			send_error("Forbidden character in the map\n");
 		}
-		if (player > 1)
-		{
-			clean_parsing_data(data);
-			free_and_set_null(map);
-			send_error("Map must contain 1 player\n");
-		}
 		i++;
 	}
-	if (player == 0)
+	if (player != 1)
 	{
 		clean_parsing_data(data);
 		free_and_set_null(map);
