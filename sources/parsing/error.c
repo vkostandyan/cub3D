@@ -12,78 +12,45 @@
 
 #include "parsing.h"
 
-void send_file_open_error(char *name)
+void	send_file_open_error(char *name)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd("Cannot open file ", 2);
 	ft_putstr_fd(name, 2);
-	// system("leaks cub3D");
+	system("leaks cub3D");
 	exit(1);
 }
 
-static void	write_type(t_type type)
+void	decide_error2(int status)
 {
-	if (type == NORTH)
-		ft_putstr_fd("NO", STDERR_FILENO);
-	else if (type == WEST)
-		ft_putstr_fd("WE", STDERR_FILENO);
-	else if (type == SOUTH)
-		ft_putstr_fd("SO", STDERR_FILENO);
-	else if (type == EAST)
-		ft_putstr_fd("EA", STDERR_FILENO);
-	else if (type == FLOOR)
-		ft_putstr_fd("F", STDERR_FILENO);
-	else if (type == CEILING)
-		ft_putstr_fd("C", STDERR_FILENO);
-}
-
-static void write_key(char *str)
-{
-	int i;
-
-	i = 0;
-	if(!str)
-		return ;
-	while(str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
-		i++;
-	while(str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
-	{
-		write(STDERR_FILENO, &str[i], 1);
-		i++;
-	}
-	write(STDERR_FILENO, "\n", 1);
-}
-
-void decide_error2(int status)
-{
-	if(status == DOUBLE_COMMA)
+	if (status == DOUBLE_COMMA)
 		ft_putstr_fd("Invalid color separator: ',,'\n", STDERR_FILENO);
-	else if(status == EDGE_COMMA)
-		ft_putstr_fd("Color values cannot start or end with ','\n", STDERR_FILENO);
-	else if(status == INVALID_RANGE)
-		ft_putstr_fd("Color values should be in a range of 0-255\n", STDERR_FILENO);
-	else if(status == INVALID_COLOR_ARGUMENTS)
+	else if (status == EDGE_COMMA)
+		ft_putstr_fd(COLOR_COMMA_ERR, STDERR_FILENO);
+	else if (status == INVALID_RANGE)
+		ft_putstr_fd(COLOR_RANGE_ERR, STDERR_FILENO);
+	else if (status == INVALID_COLOR_ARGUMENTS)
 		ft_putstr_fd("Color values can only be numbers\n", STDERR_FILENO);
 }
 
 void	decide_error(char *str, t_type type, int status)
 {
 	ft_putstr_fd("Error\n", STDERR_FILENO);
-	if(status == MALLOC)
+	if (status == MALLOC)
 		ft_putstr_fd("Malloc error\n", STDERR_FILENO);
 	else if (status == DOUBLICATE)
 	{
 		write_type(type);
 		ft_putstr_fd(" is set more than once\n", STDERR_FILENO);
 	}
-	else if(status == INVALID_KEY)
+	else if (status == INVALID_KEY)
 	{
 		ft_putstr_fd("Invalid key: ", STDERR_FILENO);
 		write_key(str);
 	}
-	else if(status == TOO_FEW_VALUES || status == TOO_MANY_VALUES)
+	else if (status == TOO_FEW_VALUES || status == TOO_MANY_VALUES)
 	{
-		if(status == TOO_FEW_VALUES)
+		if (status == TOO_FEW_VALUES)
 			ft_putstr_fd("too few arguments for: ", STDERR_FILENO);
 		else
 			ft_putstr_fd("too many arguments for: ", STDERR_FILENO);
@@ -100,6 +67,6 @@ void	send_error(char *str)
 		return ;
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(str, 2);
-    // system("leaks cub3D");
+	system("leaks cub3D");
 	exit(1);
 }
