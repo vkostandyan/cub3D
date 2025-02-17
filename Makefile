@@ -10,6 +10,7 @@ PARSING = 	parse.c \
 			getter.c \
 			helpers.c \
 			textures.c \
+			helpers_2.c \
 			array_utils.c \
 			map_parsing.c
 
