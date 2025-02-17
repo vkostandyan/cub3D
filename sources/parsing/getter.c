@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 19:03:17 by vkostand          #+#    #+#             */
-/*   Updated: 2025/02/15 16:21:22 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:32:31 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,66 +75,17 @@ void	get_textures_fds(t_parse *data)
 	data->north_fd = open(data->north, O_RDONLY);
 	if (data->north_fd == -1)
 		send_file_open_error(data->north);
+	close(data->north_fd);
 	data->south_fd = open(data->south, O_RDONLY);
 	if (data->south_fd == -1)
-	{
-		close(data->north_fd);
 		send_file_open_error(data->south);
-	}
+	close(data->south_fd);
 	data->east_fd = open(data->east, O_RDONLY);
 	if (data->east_fd == -1)
-	{
-		close(data->north_fd);
-		close(data->south_fd);
 		send_file_open_error(data->east);
-	}
+	close(data->east_fd);
 	data->west_fd = open(data->west, O_RDONLY);
 	if (data->west_fd == -1)
-	{
-		close(data->north_fd);
-		close(data->south_fd);
-		close(data->east_fd);
 		send_file_open_error(data->west);
-	}
+	close(data->west_fd);
 }
-
-// void get_player_position(t_parse *data)
-// {
-//     int i;
-//     int j;
-
-//     i = 0;
-//     while(data->map[i])
-//     {
-//         j = 0;
-//         while(data->map[i][j])
-//         {
-//             if(data->map[i][j] == 'N')
-//             {
-//                 data->player.x = j + 1;
-//                 data->player.y = i + 1;
-//                 data->player.start_direction = NORTH;
-//             }
-//             if(data->map[i][j] == 'S')
-//             {
-//                 data->player.x = j + 1;
-//                 data->player.y = i + 1;
-//                 data->player.start_direction = SOUTH;
-//             }
-//             if(data->map[i][j] == 'E')
-//             {
-//                 data->player.x = j + 1;
-//                 data->player.y = i + 1;
-//                 data->player.start_direction = EAST;
-//             }
-//             if(data->map[i][j] == 'W')
-//             {
-//                 data->player.x = j + 1;
-//                 data->player.y = i + 1;
-//                 data->player.start_direction = WEST;
-//             }
-//             j++;
-//         }
-//         i++;
-//     }
-// }
