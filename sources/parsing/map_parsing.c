@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 20:47:55 by vkostand          #+#    #+#             */
-/*   Updated: 2025/02/15 16:10:30 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/02/17 15:44:13 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ void	check_walls(t_parse *data)
 			if (data->map[i][j] == '0')
 			{
 				if (!data->map[i][j + 1] || !data->map[i][j - 1] || !data->map[i
-					- 1][j] || !data->map[i + 1][j] || data->map[i][j
-					+ 1] == ' ' || data->map[i][j - 1] == ' ' || data->map[i
-					- 1][j] == ' ' || data->map[i + 1][j] == ' ')
+					- 1][j] || !data->map[i + 1][j] || data->map[i + 1]
+					|| data->map[i - 1] || data->map[i][j + 1] == ' '
+					|| data->map[i][j - 1] == ' ' || data->map[i - 1][j] == ' '
+					|| data->map[i + 1][j] == ' ')
 				{
 					clean_parsing_data(data);
 					send_error("Map must be surrounded by walls\n");
@@ -67,7 +68,6 @@ void	check_walls(t_parse *data)
 		}
 		i++;
 	}
-	(void)data;
 }
 
 void	check_chars(t_parse *data, char *map)
@@ -112,8 +112,8 @@ void	check_empty_lines(t_parse *data, char *map)
 			i++;
 		while (map[i] && map[i] != '\n')
 		{
-			if (map[i] == '1' || map[i] == '0' || map[i] == 'N'
-				|| map[i] == 'S' || map[i] == 'E' || map[i] == 'W')
+			if (map[i] == '1' || map[i] == '0' || map[i] == 'N' || map[i] == 'S'
+				|| map[i] == 'E' || map[i] == 'W')
 				flag = 1;
 			i++;
 		}
