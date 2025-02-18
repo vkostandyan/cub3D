@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 20:47:55 by vkostand          #+#    #+#             */
-/*   Updated: 2025/02/17 15:44:13 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:10:52 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,35 @@ char	*read_map(int fd)
 	return (result);
 }
 
+void	check_walls_helper(t_parse *data, int i, int j)
+{
+	if (!data->map[i][j + 1] || (data->map[i][j + 1] && (data->map[i][j
+				+ 1] == ' ' || data->map[i][j + 1] == '\n')))
+	{
+		clean_parsing_data(data);
+		send_error("Map must be surrounded by walls\n");
+	}
+	if (j == 0 || !data->map[i][j - 1] || (data->map[i][j - 1]
+			&& (data->map[i][j - 1] == ' ' || data->map[i][j - 1] == '\n')))
+	{
+		clean_parsing_data(data);
+		send_error("Map must be surrounded by walls\n");
+	}
+	if (!data->map[i - 1] || !data->map[i + 1])
+	{
+		clean_parsing_data(data);
+		send_error("Map must be surrounded by walls\n");
+	}
+	if (i == 0 || !data->map[i - 1][j] || (data->map[i - 1][j] && (data->map[i
+				- 1][j] == ' ' || data->map[i - 1][j] == '\n')) || !data->map[i
+		+ 1][j] || (data->map[i + 1][j] && (data->map[i + 1][j] == ' '
+				|| data->map[i + 1][j] == '\n')))
+	{
+		clean_parsing_data(data);
+		send_error("Map must be surrounded by walls\n");
+	}
+}
+
 void	check_walls(t_parse *data)
 {
 	int	i;
@@ -52,18 +81,11 @@ void	check_walls(t_parse *data)
 		j = 0;
 		while (data->map[i][j])
 		{
+			// if (data->map[i][j] == '0' || data->map[i][j] == 'N'
+			// 	|| data->map[i][j] == 'S' || data->map[i][j] == 'W'
+			// 	|| data->map[i][j] == 'E')
 			if (data->map[i][j] == '0')
-			{
-				if (!data->map[i][j + 1] || !data->map[i][j - 1] || !data->map[i
-					- 1][j] || !data->map[i + 1][j] || data->map[i + 1]
-					|| data->map[i - 1] || data->map[i][j + 1] == ' '
-					|| data->map[i][j - 1] == ' ' || data->map[i - 1][j] == ' '
-					|| data->map[i + 1][j] == ' ')
-				{
-					clean_parsing_data(data);
-					send_error("Map must be surrounded by walls\n");
-				}
-			}
+				check_walls_helper(data, i, j);
 			j++;
 		}
 		i++;

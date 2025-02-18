@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_and_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:47:00 by kgalstya          #+#    #+#             */
-/*   Updated: 2025/02/11 15:46:54 by kgalstya         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:13:24 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void free_and_exit(t_cub3D *data)
 		mlx_clear_window(data->mlx, data->mlx_win);
 		mlx_destroy_window(data->mlx, data->mlx_win);
 	}
-	printf(RED "\nEXITED\n" RESET);
 	// system("leaks cub3D");
 	exit(1);
 }
