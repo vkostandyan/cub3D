@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 14:46:33 by vkostand          #+#    #+#             */
-/*   Updated: 2025/02/15 16:07:53 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:49:12 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	check_and_save_textures(char *str, t_parse *data, int fd)
 		clean_parsing_data(data);
 		close(fd);
 		free_and_set_null(str);
-		system("leaks cub3D");
 		exit(1);
 	}
 	status = save_textures(data, str, type);
@@ -35,7 +34,6 @@ static void	check_and_save_textures(char *str, t_parse *data, int fd)
 		free_and_set_null(str);
 		close(fd);
 		clean_parsing_data(data);
-		system("leaks cub3D");
 		exit(1);
 	}
 }

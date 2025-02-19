@@ -17,7 +17,6 @@ void	send_file_open_error(char *name)
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd("Cannot open file ", 2);
 	ft_putstr_fd(name, 2);
-	system("leaks cub3D");
 	exit(1);
 }
 
@@ -67,6 +66,5 @@ void	send_error(char *str)
 		return ;
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(str, 2);
-	system("leaks cub3D");
 	exit(1);
 }
