@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 19:03:17 by vkostand          #+#    #+#             */
-/*   Updated: 2025/02/17 14:32:31 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:33:53 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	get_player_position(t_parse *data)
 			if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
 				|| data->map[i][j] == 'E' || data->map[i][j] == 'W')
 			{
+				check_walls_helper(data, i, j);
 				data->player.x = j + 1;
 				data->player.y = i + 1;
 				data->player.start_direction = \

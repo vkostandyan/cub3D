@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 20:47:55 by vkostand          #+#    #+#             */
-/*   Updated: 2025/02/18 18:10:52 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:34:15 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,6 @@ void	check_walls(t_parse *data)
 		j = 0;
 		while (data->map[i][j])
 		{
-			// if (data->map[i][j] == '0' || data->map[i][j] == 'N'
-			// 	|| data->map[i][j] == 'S' || data->map[i][j] == 'W'
-			// 	|| data->map[i][j] == 'E')
 			if (data->map[i][j] == '0')
 				check_walls_helper(data, i, j);
 			j++;
@@ -117,34 +114,6 @@ void	check_chars(t_parse *data, char *map)
 		clean_parsing_data(data);
 		free_and_set_null(map);
 		send_error("Map must contain 1 player\n");
-	}
-}
-
-void	check_empty_lines(t_parse *data, char *map)
-{
-	int	i;
-	int	flag;
-
-	i = 0;
-	flag = 0;
-	while (map[i])
-	{
-		flag = 0;
-		if (map[i] == '\n')
-			i++;
-		while (map[i] && map[i] != '\n')
-		{
-			if (map[i] == '1' || map[i] == '0' || map[i] == 'N' || map[i] == 'S'
-				|| map[i] == 'E' || map[i] == 'W')
-				flag = 1;
-			i++;
-		}
-		if (flag == 0)
-		{
-			free_and_set_null(map);
-			clean_parsing_data(data);
-			send_error("Empty line in the map\n");
-		}
 	}
 }
 

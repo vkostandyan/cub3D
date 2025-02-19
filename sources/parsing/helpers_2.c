@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:27:02 by vkostand          #+#    #+#             */
-/*   Updated: 2025/02/15 16:36:21 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:34:25 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,32 @@ void	write_key(char *str)
 		i++;
 	}
 	write(STDERR_FILENO, "\n", 1);
+}
+
+void	check_empty_lines(t_parse *data, char *map)
+{
+	int	i;
+	int	flag;
+
+	i = 0;
+	flag = 0;
+	while (map[i])
+	{
+		flag = 0;
+		if (map[i] == '\n')
+			i++;
+		while (map[i] && map[i] != '\n')
+		{
+			if (map[i] == '1' || map[i] == '0' || map[i] == 'N' || map[i] == 'S'
+				|| map[i] == 'E' || map[i] == 'W')
+				flag = 1;
+			i++;
+		}
+		if (flag == 0)
+		{
+			free_and_set_null(map);
+			clean_parsing_data(data);
+			send_error("Empty line in the map\n");
+		}
+	}
 }
