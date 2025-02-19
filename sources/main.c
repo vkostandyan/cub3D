@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgalstya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 21:43:38 by vkostand          #+#    #+#             */
-/*   Updated: 2025/02/10 16:55:32 by kgalstya         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:44:21 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "cub3D.h"
-int main(int argc, char **argv)
+#include "parsing.h"
+
+int	main(int argc, char **argv)
 {
-	t_parse pars_data;
-    pars_data = parse(argc, argv);
+	t_parse	pars_data;
+
+	pars_data = parse(argc, argv);
 	game(*argv, &pars_data);
-    // system("leaks cub3D");
-    (void)argc;
-    (void)argv;
-    return (0);
+	(void)argc;
+	(void)argv;
+	return (0);
 }
