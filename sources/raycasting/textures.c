@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:26:45 by kgalstya          #+#    #+#             */
-/*   Updated: 2025/02/19 17:40:32 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:39:32 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_textures_adrr(t_cub3D *data)
 		|| !data->tex->ea.addr)
 	{
 		destroy_img_tex(data);
-		printf(RED "HAVE PROBLEM WITH IMAGE\n" RESET);
+		printf("Error\nHAVE PROBLEM WITH IMAGE\n");
 		exit(1);
 	}
 	return (0);
@@ -52,7 +52,7 @@ void	set_textures(t_cub3D *data)
 	if (!data->tex->ea.img || !data->tex->we.img || !data->tex->no.img
 		|| !data->tex->so.img)
 	{
-		printf(RED "CAN'T USE IMAGE\n" RESET);
+		printf("Error\nCAN'T USE IMAGE\n");
 		destroy_img_tex(data);
 		exit(1);
 	}

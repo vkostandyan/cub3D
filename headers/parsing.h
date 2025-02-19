@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 15:01:20 by vkostand          #+#    #+#             */
-/*   Updated: 2025/02/19 17:35:42 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:36:59 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void				decide_error(char *str, t_type type, int status);
 int					set_floor(t_parse *data, char *str);
 int					set_ceiling(t_parse *data, char *str);
 int					get_color(char *str);
-int					get_color2(char **split);
+int					get_color2(char **split, int len);
 int					check_digit(char **split);
 void				free_and_set_null(char *str);
 char				*ft_join(char const *s1, char const *s2);

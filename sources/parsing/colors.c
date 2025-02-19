@@ -12,18 +12,24 @@
 
 #include "parsing.h"
 
-int	get_color2(char **split)
+int	get_color2(char **split, int len)
 {
 	int	red;
 	int	green;
 	int	blue;
 
-	if (ft_strlen(split[0]) > 10 || ft_strlen(split[1]) > 10
-		|| ft_strlen(split[2]) > 10)
+	if (count_array_len(split) != 3)
 	{
 		free_array(split);
-		return (INVALID_RANGE);
+		if (len > 3)
+			return (TOO_MANY_VALUES);
+		return (TOO_FEW_VALUES);
 	}
+	if (!check_digit(split))
+		return (free_array(split), INVALID_COLOR_ARGUMENTS);
+	if (ft_strlen(split[0]) > 10 || ft_strlen(split[1]) > 10
+		|| ft_strlen(split[2]) > 10)
+		return (free_array(split), INVALID_RANGE);
 	red = ft_atoi(split[0]);
 	green = ft_atoi(split[1]);
 	blue = ft_atoi(split[2]);
@@ -37,6 +43,7 @@ int	get_color2(char **split)
 int	get_color(char *str)
 {
 	char	**split;
+	char	*tmp;
 	int		len;
 
 	if ((str[0] && str[0] == ',') || (str[ft_strlen(str) - 1]
@@ -44,23 +51,17 @@ int	get_color(char *str)
 		return (EDGE_COMMA);
 	if (ft_strstr(str, ",,"))
 		return (DOUBLE_COMMA);
-	split = ft_split(str, ',');
+	if (ft_strstr(str, "\n"))
+	{
+		tmp = ft_substr(str, 0, ft_strlen(str) - 1);
+		split = ft_split(tmp, ',');
+	}
+	else
+		split = ft_split(str, ',');
 	if (!split)
 		return (MALLOC);
 	len = count_array_len(split);
-	if (count_array_len(split) != 3)
-	{
-		free_array(split);
-		if (len > 3)
-			return (TOO_MANY_VALUES);
-		return (TOO_FEW_VALUES);
-	}
-	if (!check_digit(split))
-	{
-		free_array(split);
-		return (INVALID_COLOR_ARGUMENTS);
-	}
-	return (get_color2(split));
+	return (get_color2(split, len));
 }
 
 int	set_floor(t_parse *data, char *str)
