@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 15:01:20 by vkostand          #+#    #+#             */
-/*   Updated: 2025/02/15 16:37:47 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:35:42 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ void				send_file_open_error(char *name);
 void				get_textures_fds(t_parse *data);
 void				write_type(t_type type);
 void				write_key(char *str);
+void				check_walls_helper(t_parse *data, int i, int j);
+void				check_empty_lines(t_parse *data, char *map);
 
 // array utils
 void				*free_array(char **str);
