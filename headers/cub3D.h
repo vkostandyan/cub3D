@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:36:34 by vkostand          #+#    #+#             */
-/*   Updated: 2025/02/19 17:37:44 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:44:00 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ int				close_window(t_cub3D *data);
 void			cast_rays(t_cub3D *data);
 float			check_angle(float angle);
 void			instal_the_wall(t_cub3D *data, int ray);
+int				check_circle(float angle, int flag);
 
 //  movement  //
 int				mlx_for_move(int keycode, t_cub3D *data);
