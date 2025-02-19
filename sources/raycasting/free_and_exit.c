@@ -6,7 +6,7 @@
 /*   By: vkostand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:47:00 by kgalstya          #+#    #+#             */
-/*   Updated: 2025/02/19 17:41:57 by vkostand         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:48:38 by vkostand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ void	free_and_exit(t_cub3D *data)
 		mlx_clear_window(data->mlx, data->mlx_win);
 		mlx_destroy_window(data->mlx, data->mlx_win);
 	}
-	exit(1);
+	exit(0);
 }
