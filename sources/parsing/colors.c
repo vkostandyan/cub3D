@@ -55,6 +55,7 @@ int	get_color(char *str)
 	{
 		tmp = ft_substr(str, 0, ft_strlen(str) - 1);
 		split = ft_split(tmp, ',');
+		free_and_set_null(tmp);
 	}
 	else
 		split = ft_split(str, ',');
